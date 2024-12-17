@@ -34,12 +34,30 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+        if (Data == value)
+        {
+            return true;
+        }
+        else if (value < Data)
+        {
+            // Search in the left subtree
+            return Left != null && Left.Contains(value);
+        }
+        else
+        {
+            // Search in the right subtree
+            return Right != null && Right.Contains(value);
+        }
     }
 
     public int GetHeight()
-    {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
-    }
+{
+    // Recursively calculate the height of the left and right subtrees
+    int leftHeight = (Left != null && Left.Data != Data) ? Left.GetHeight() : 0;
+    int rightHeight = (Right != null && Right.Data != Data) ? Right.GetHeight() : 0;
+
+    // The height of the current node is 1 + the greater height of the two subtrees
+    return 1 + Math.Max(leftHeight, rightHeight);
+}
+
 }
